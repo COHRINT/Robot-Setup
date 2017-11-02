@@ -1,0 +1,119 @@
+New U3 Image steps:
+1) Download the 16.04 image: https://odroid.in/ubuntu_16.04lts/
+2) unxz -k image ____
+3) Connect via serial console
+User: odroid
+Password: odroid
+User: root
+Password: odroid
+4) Plug in the ethernet cable and run $ sudo apt-get update via serial
+5) $ sudo nano /etc/network/interfaces
+   Copy the text on the github in the interfaces file
+6) Set up the wifi via the instructions below
+7) Add an empty udev rule to fix wireless device naming $ touch /etc/udev/rules.d/80-net-setup-link.rules 
+8) Comment out lp, ppdev, parport_pc in /etc/modules-load.d/cups-filters.conf in order for systemd to properly startup (systemd looks for them and cannot find them, probably b/c they've been deleted)
+$ sudo nano /etc/modules-load.d/cups-filters.conf
+9) Fix the wifi set up on the hardkernel image. This'll be fun
+   - $ sudo apt-get install git
+10) Install the 3.8.13.30 headers
+$ wget https://secure-web.cisco.com/1H2IEOqkUKR5Fs1_R030aqKJcV8MepwP6Dsm2tQ-AmhKydvWLIgO2WVfnT9oTiDgOIpbslZwxYkGGJJHPn-3bXs2DFWoo5RY7W_9NrtSvNHPbtIq3I67SQs-lBtUUB4DISPweJg70L_wwBS6RMeakTcZ3-is--6aaXU34hlY4FxfESM760jFu7VBgj8QmOn-OIQBhY8YyXLeYbJuyS5rGLyC39Gt6V6SYtEoBCdiqWe79-yoqv6sI_N91sOzIbSCNlIXfygkhPC89V1X-aZOzMwnP08USr6UpP09YgFVNUlu85qFrOYZCQahcjvVHAOp13eyKSY-_vLQHNKAcoPdRL3rLIHhzZ7geklOBaQZ2YD5LchyfhUj6pGbq65fOwOzlHI9oNrLVsCt_DYLA02R6SVTCMRgiKy-lkxhQBs9buHyindE6GH-t5VgWdN1DtR9KxBA11LBJ_P7W_T2dApK80A/https%3A%2F%2Foph.mdrjr.net%2Fmeveric%2Fpool%2Fx2%2Fl%2Flinux-source-3.8.13.30%2Flinux-headers-3.8.13.30_3.8.13.30-20161026-X2_armhf.deb
+
+11) $ sudo dpkg -i linux-headers-3.8.13.30_3.8.13.30-20161026-X2_armhf.deb
+
+12) Clone a patched rtl8192cu driver repo https://github.com/cmicali/rtl8192cu_beaglebone
+$ git clone https://github.com/cmicali/rtl8192cu_beaglebone
+13) $ cd rtl8192cu
+14) Build the package without cross compiling
+The following are ' (single quotes)
+$ make CROSS_COMPILE=''
+15) Copy the generated .ko file to /lib/modules/3.8.13.30
+# cp 8192cu.ko /lib/modules/3.8.13.30
+16) Rebuild dependencies
+# depmod -a
+17) Blacklist the old driver
+# nano /etc/modprobe.d/blacklist-rtl8192cu.conf
+add line: 'blacklist rtl8192cu'
+18) disable NetworkManager-wait-online.service
+# sudo systemctl disable NetworkManager-wait-online.service
+19) # reboot
+
+NOTE: iw dev normally shows no input -> use iwconfig (this is b/c we are not using netlink, instead we are using a combo of wisp and NetworkManager)
+
+20) Proceed to install ros
+    $ sudo apt-get install ros-kinetic-navigation
+    $ sudo apt-get install ros-kinetic-pcl-ros
+    $ sudo apt-get install ros-kinetic-turtlebot
+    $ sudo apt-get install ros-kinetic-turtlebot-navigation
+    $ sudo apt-get install ros-kinetic-rosbridge-suite
+    $ sudo apt-get install ros-kinetic-mjpeg-server (replaced by web_video_server, compile from src?)
+    $ sudo apt-get install ros-kinetic-map-server
+
+21) Configure turtlebot env variables (we'll just add them to the bashrc)
+    $ nano ~/.bashrc
+    Append the following lines to the bottom
+    source /opt/ros/kinetic/setup.bash
+    export ROS_MASTER_URI=http://${SSH_CLIENT%% *}:11311
+    export ROS_HOSTNAME=192.168.20.___ with the last 3 digits corresponding to the particular robot IP
+    export ROBOT=$HOSTNAME
+    export TURTLEBOT_STACSK=circles
+    export TURTLEBOT_BASE=create
+    export TURTLEBOT_SERIAL_PORT=/dev/ttyUSB0
+
+22) Create a ROS workspace in the home dir (see the ROS wiki) and build it; call it catkin_ws
+23) (OPTIONAL) $ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc (Make sure >> not > the first appends, the former replaces text)
+This'll allow ros to function in this repository more effectively
+24) $ source ~/.bashrc
+25) Move the vicon_nav.launch file into the catkin_ws
+On the desktop computer in the dir of vicon_nav $ scp vicon_nav.launch (user)@odroid:/home/(user)/catkin_ws/src (No slash on the end)
+
+
+
+
+
+Reboot before plugging in wifi dongle
+- 
+- 
+
+Make sure turtlebot environmental variables are configured correctly
+
+Come back to : 
+$ adduser zhora
+
+
+Documentation eMMC
+----
+
+
+
+Documentation - "Debugging does not begin at layer 7" - Steve
+
+Add the interfaces file in the repo to the /etc/network/ directory
+
+Git needed
+$ sudo apt-get install git
+
+*Set up the wifi*
+Install the 3.8.13.30 headers
+$ wget https://secure-web.cisco.com/1H2IEOqkUKR5Fs1_R030aqKJcV8MepwP6Dsm2tQ-AmhKydvWLIgO2WVfnT9oTiDgOIpbslZwxYkGGJJHPn-3bXs2DFWoo5RY7W_9NrtSvNHPbtIq3I67SQs-lBtUUB4DISPweJg70L_wwBS6RMeakTcZ3-is--6aaXU34hlY4FxfESM760jFu7VBgj8QmOn-OIQBhY8YyXLeYbJuyS5rGLyC39Gt6V6SYtEoBCdiqWe79-yoqv6sI_N91sOzIbSCNlIXfygkhPC89V1X-aZOzMwnP08USr6UpP09YgFVNUlu85qFrOYZCQahcjvVHAOp13eyKSY-_vLQHNKAcoPdRL3rLIHhzZ7geklOBaQZ2YD5LchyfhUj6pGbq65fOwOzlHI9oNrLVsCt_DYLA02R6SVTCMRgiKy-lkxhQBs9buHyindE6GH-t5VgWdN1DtR9KxBA11LBJ_P7W_T2dApK80A/https%3A%2F%2Foph.mdrjr.net%2Fmeveric%2Fpool%2Fx2%2Fl%2Flinux-source-3.8.13.30%2Flinux-headers-3.8.13.30_3.8.13.30-20161026-X2_armhf.deb
+
+$ sudo dpkg -i linux-headers-3.8.13.30_3.8.13.30-20161026-X2_armhf.deb
+
+Clone a patched rtl8192cu driver repo https://github.com/cmicali/rtl8192cu_beaglebone
+$ cd rtl8192cu
+The following are ' (single quotes)
+$ make CROSS_COMPILE=''
+
+Copy the generated .ko file to /lib/modules/3.8.13.30
+# cp 8192cu.ko /lib/modules/3.8.13.30
+
+Rebuild dependencies
+# depmod -a
+
+Blacklist driver
+# nano /etc/modprobe.d/blacklist-rtl8192cu.conf
+add line: 'blacklist rtl8192cu'
+
+disable NetworkManager-wait-online.service
+# sudo systemctl disable NetworkManager-wait-online.service
+
+#reboot
