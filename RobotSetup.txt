@@ -64,8 +64,8 @@ NOTE: iw dev normally shows no input -> use iwconfig (this is b/c we are not usi
 This'll allow ros to function in this repository more effectively
 24) $ source ~/.bashrc
 25) Move the vicon_nav.launch file into the catkin_ws
-On the desktop computer in the dir of vicon_nav $ scp vicon_nav.launch (user)@odroid:/home/(user)/catkin_ws/src (No slash on the end)
-
+On the desktop computer in the dir of vicon_nav $ scp vicon_nav.launch odroid@odroid:/home/(user)/catkin_ws/src (No slash on the end)
+26) Make the new user (ie zhora, pris, roy, deckard)
 
 
 
