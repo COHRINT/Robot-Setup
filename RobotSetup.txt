@@ -9,9 +9,9 @@ If you see output such as /dev/sdX1 and/or /dev/sdX2 umount those:
 Recheck mount |grep /dev/sdX and make sure there's no output, umount that partition if there's still something
 Once everything's unmounted let's we're good to proceed
 # zero out the eMMC's current partition table (first 8 or so kilobytes)
-1) $ sudo dd if=/dev/zero of=/dev/sdb
+1) $ sudo dd if=/dev/zero of=/dev/sdX
 # load the image onto the eMMC (this'll take awhile)
-2) $ sudo dd if=anonymous.img of=/dev/sdb bs=4M conv=fsync
+2) $ sudo dd if=anonymous.img of=/dev/sdX bs=4M conv=fsync
 3) Once done, right click on one of the two USB icons that pops up and click "Eject Parent Drive"
 Remove the eMMC from your computer and plug it into an Odroid, plug in a wifi dongle and hook up a serial console to the odroid and usb and in a terminal on your computer run:
 # screen /dev/ttyUSB0 115200n81 (your computer may have a differnt name instead of /dev/ttyUSB0 so replace that with the name that your computer assigns to the uart device - to find that simply run $ dmesg |tail once you plug in the device and look for a /dev/tty... name that the kernel it assigns it)
@@ -21,13 +21,37 @@ The wifi dongle should be blinking
 $ ping google.com and check at the end of the line for time=X.XX
 If it says "unresolved host" you have a connection issue, see there was a debug wifi connection document in the repo with this file
 Make the new user
-# nano /etc/hostname, replace with the robot's name
+3) # nano /etc/hostname, replace with the robot's name
 4) # nano /etc/hosts, change "odroid" to the robot's name
+Change the password to "unicorn"
+5) # passwd odroid
+new password: "unicorn"
+All good
+
 
 ------------------------------------------------
 Make a U3 Image steps:
 1) Download the 16.04 image: https://odroid.in/ubuntu_16.04lts/
 2) unxz -k image ____
+Connect the eMMC through the usb-uSD-eMMC adapter to your computer
+Find the device name of the eMMC chip (/dev/sdX) (X is a letter a,b,c...)
+you can do this through $ sudo parted -l and looking for the right device
+*IT IS VERY IMPORTANT YOU PICK THE RIGHT DEVICE, OR ELSE YOU'LL WRITE TO ANOTHER DISK ON YOUR HARDRIVE" disk destroyer (dd) 
+$ mount |grep /dev/sdX
+If you see output such as /dev/sdX1 and/or /dev/sdX2 umount those:
+# umount /dev/sdX1 /dev/sdX2
+Recheck mount |grep /dev/sdX and make sure there's no output, umount that partition if there's still something
+Once everything's unmounted let's we're good to proceed
+# zero out the eMMC's current partition table (first 8 or so kilobytes)
+1) $ sudo dd if=/dev/zero of=/dev/sdX
+# load the image onto the eMMC (this'll take awhile)
+2) $ sudo dd if=___.img of=/dev/sdX bs=4M conv=fsync
+3) Once done, right click on one of the two USB icons that pops up and click "Eject Parent Drive"
+Remove the eMMC from your computer and plug it into an Odroid, plug in a wifi dongle and hook up a serial console to the odroid and usb and in a terminal on your computer run:
+# screen /dev/ttyUSB0 115200n81 (your computer may have a differnt name instead of /dev/ttyUSB0 so replace that with the name that your computer assigns to the uart device - to find that simply run $ dmesg |tail once you plug in the device and look for a /dev/tty... name that the kernel it assigns it)
+Press enter a few times and you should see a terminal odroid@odroid:~$
+You're in
+
 3) Connect via serial console
 User: odroid
 Password: odroid
