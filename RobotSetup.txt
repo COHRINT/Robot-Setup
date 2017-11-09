@@ -26,6 +26,7 @@ Make the new user
 Change the password to "unicorn"
 5) # passwd odroid
 new password: "unicorn"
+6) # reboot
 All good
 
 
