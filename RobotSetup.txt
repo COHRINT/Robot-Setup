@@ -29,6 +29,9 @@ new password: "unicorn"
 6) # reboot
 All good
 
+TODO Add emacs on the preinstall and our software git cloned
+TODO Add uvc camera to be preinstalled and all good to go 
+TODO Add locate to be preinstalled
 
 ------------------------------------------------
 Make a U3 Image steps:
