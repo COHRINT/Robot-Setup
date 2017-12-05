@@ -17,12 +17,71 @@ then
 fi
 
 # make name all lowercase
-rob_name="${1,,}" 
-echo "Robot name: $rob_name"
+robot_name="${1,,}" 
+echo "Robot name: $robot_name"
+
+# set up hostname info and locales
 
 echo "Connect the odroid to an Ethernet cable. Press [ENTER] to continue"
 read -n 1
 
-exit 0
+echo "Updating repositories"
 sudo apt-get update
+
+# Setup the netowrk keys
+echo "What is the password to RECUV-VICON?"
+read password
+echo "If you need to change the password, go to /etc/network/interfaces and edit the wpa_psk value, press [ENTER] to continue"
+read -n 1
+
+# Append the password to the network file
+# cp setup_files/interfaces interfaces # make a new file in current dir
+# echo -e "\twpa_psk \"$password\"" >> interfaces
+# echo "iface default inet dhcp" >> interfaces
+# sudo mv interfaces /etc/network/interfaces # replace the other network file
+
+# Setup a functional wifi driver
+# 1) Empty udev to fix wireless dev naming
+touch /etc/udev/rules.d/80-net-setup-link.rules
+# 2) Allow systemd to properly start up and not look for these
+sudo cp setup_files/cups-filters.conf /etc/modules-load.d/
+# 3) Install 3.8.13.30 kernel headers
+cd ~
+wget https://secure-web.cisco.com/1H2IEOqkUKR5Fs1_R030aqKJcV8MepwP6Dsm2tQ-AmhKydvWLIgO2WVfnT9oTiDgOIpbslZwxYkGGJJHPn-3bXs2DFWoo5RY7W_9NrtSvNHPbtIq3I67SQs-lBtUUB4DISPweJg70L_wwBS6RMeakTcZ3-is--6aaXU34hlY4FxfESM760jFu7VBgj8QmOn-OIQBhY8YyXLeYbJuyS5rGLyC39Gt6V6SYtEoBCdiqWe79-yoqv6sI_N91sOzIbSCNlIXfygkhPC89V1X-aZOzMwnP08USr6UpP09YgFVNUlu85qFrOYZCQahcjvVHAOp13eyKSY-_vLQHNKAcoPdRL3rLIHhzZ7geklOBaQZ2YD5LchyfhUj6pGbq65fOwOzlHI9oNrLVsCt_DYLA02R6SVTCMRgiKy-lkxhQBs9buHyindE6GH-t5VgWdN1DtR9KxBA11LBJ_P7W_T2dApK80A/https%3A%2F%2Foph.mdrjr.net%2Fmeveric%2Fpool%2Fx2%2Fl%2Flinux-source-3.8.13.30%2Flinux-headers-3.8.13.30_3.8.13.30-20161026-X2_armhf.deb
+
+# 4) Unpackage the headers
+sudo dpkg -i linux-headers-3.8.13.30_3.8.13.30-20161026-X2_armhf.deb
+
+# 5) New driver for the rtl8192cu
+git clone https://github.com/cmicali/rtl8192cu_beaglebone
+cd rtl8192cu_beaglebone
+# 6) Build the source code w/o cross compiling
+make CROSS_COMPILE=''
+# 7) Copy the generated driver file to the drivers dir
+sudo cp 8192cu.ko /lib/modules/3.8.13.30
+# 8) Rebuild driver modules
+sudo depmod -a
+# 9) Blacklist the old driver
+sudo cp setup_files/blacklist-rtl8192cu.conf /etc/modprobe.d/
+# 10) Network Manager no bueno
+sudo systemctl disable NetworkManager-wait-online.service
+
+
+echo "The system will reboot, when it begins again the wifi dongle should be blinking and $ ssh odroid@$robot_name should be possible. Press [ENTER] to continue."
+read -n 1
+
+
+# Install various command line tools
+sudo apt-get locate
+sudo updatedb
+
+sudo apt-get install nano
+sudo apt-get install emacs # most important 
+
+# Add more command line installs here...
+
+
+sudo reboot
+
+exit 0
 
