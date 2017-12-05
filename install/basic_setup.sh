@@ -20,13 +20,24 @@ fi
 robot_name="${1,,}" 
 echo "Robot name: $robot_name"
 
-# set up hostname info and locales
-
 echo "Connect the odroid to an Ethernet cable. Press [ENTER] to continue"
 read -n 1
 
 echo "Updating repositories"
 sudo apt-get update
+
+# Set up hostname
+sudo touch /etc/hostname
+sudo echo "$robot_name" >> /etc/hostname
+sudo sed -i 's/odroid/$robot_name/g' /etc/hosts
+
+# Set up Locales
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US
+export LC_ALL=en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8
+sudo update-locale LANGUAGE=en_US
+sudo update-locale LANG=en_US.UTF-8
 
 # Setup the netowrk keys
 echo "What is the password to RECUV-VICON?"
@@ -35,10 +46,10 @@ echo "If you need to change the password, go to /etc/network/interfaces and edit
 read -n 1
 
 # Append the password to the network file
-# cp setup_files/interfaces interfaces # make a new file in current dir
-# echo -e "\twpa_psk \"$password\"" >> interfaces
-# echo "iface default inet dhcp" >> interfaces
-# sudo mv interfaces /etc/network/interfaces # replace the other network file
+cp setup_files/interfaces interfaces # make a new file in current dir
+echo -e "\twpa_psk \"$password\"" >> interfaces
+echo "iface default inet dhcp" >> interfaces
+sudo mv interfaces /etc/network/interfaces # replace the other network file
 
 # Setup a functional wifi driver
 # 1) Empty udev to fix wireless dev naming
@@ -66,11 +77,6 @@ sudo cp setup_files/blacklist-rtl8192cu.conf /etc/modprobe.d/
 # 10) Network Manager no bueno
 sudo systemctl disable NetworkManager-wait-online.service
 
-
-echo "The system will reboot, when it begins again the wifi dongle should be blinking and $ ssh odroid@$robot_name should be possible. Press [ENTER] to continue."
-read -n 1
-
-
 # Install various command line tools
 sudo apt-get locate
 sudo updatedb
@@ -80,8 +86,9 @@ sudo apt-get install emacs # most important
 
 # Add more command line installs here...
 
+echo "The system will reboot, when it begins again the wifi dongle should be blinking and $ ssh odroid@$robot_name should be possible. Press [ENTER] to continue."
+read -n 1
 
 sudo reboot
-
 exit 0
 
