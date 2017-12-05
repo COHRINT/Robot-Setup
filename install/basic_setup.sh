@@ -35,13 +35,15 @@ touch /etc/hostname
 echo "$robot_name" >> /etc/hostname
 sed -i 's/odroid/$robot_name/g' /etc/hosts
 
-# Set up Locales
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US
-export LC_ALL=en_US.UTF-8
-update-locale LC_ALL=en_US.UTF-8
-update-locale LANGUAGE=en_US
-update-locale LANG=en_US.UTF-8
+# Set up Locales, check if they've already been set
+if ! [ -v LANG ]; then
+    export LANG=en_US.UTF-8
+    export LANGUAGE=en_US
+    export LC_ALL=en_US.UTF-8
+    update-locale LANG=en_US.UTF-8
+    update-locale LC_ALL=en_US.UTF-8
+    update-locale LANGUAGE=en_US
+fi
 
 # Setup the netowrk keys
 echo "What is the password to RECUV-VICON?"
