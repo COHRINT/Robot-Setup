@@ -35,25 +35,25 @@ If that does not work, your computer may have a differnt name instead of /dev/tt
 
 If you get [screen is terminating] unplug and replug the serial USB from your computer and try again in a different terminal
       
-10) You should see a terminal "odroid login: " *Login as the user "odroid"*. (If you see no output on the terminal, press enter a few times.)
+10) You should see a terminal "odroid login: " *Login as the user "odroid"*. (If you see no output on the terminal, try pressing enter a few times.)
 
 LOGINS:
 - User: **odroid**, Password: **odroid**
 - User: **root**, Password: **odroid**
 
-11) Plug in an ethernet cable and install git
-sudo password: **odroid**
-$ sudo apt-get install git
+11) Plug in an ethernet cable and install git. Password: **odroid**
+- $ sudo apt-get install git
 12) Get cohrint_turtlebot
-$ git clone https://github.com/COHRINT/cohrint_turtlebot.git
-$ cd cohrint_turtlebot/install
+- $ git clone https://github.com/COHRINT/cohrint_turtlebot.git
+- $ cd cohrint_turtlebot/install
 13) Follow the steps in the shell script
-$ sudo bash basic_setup.sh robot_name
+- $ sudo bash basic_setup.sh robot_name
 
 #### For Installing Cops and Robots Dependencies
-14) $ sudo bash cnr_setup.sh
+14) Install CnR dependencies
+- $ sudo bash cnr_setup.sh
 15) To set up quick aliases:
-    $ bash get_cnr_aliases.sh
+- $ bash get_cnr_aliases.sh
 
 ### Odroid File Tracking
 
