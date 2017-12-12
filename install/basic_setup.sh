@@ -49,7 +49,7 @@ update-locale LANGUAGE=en_US
 update-locale LC_ALL=en_US.UTF-8
 
 echo "---------------------------"
-echo "The hostname and locales have been set up. When the system reboots, run basic_setup2.sh as root. Press [ENTER] to continue."
+echo -e "The hostname and locales have been set up. When the system reboots, run basic_setup2.sh as root.\nPress [ENTER] to continue."
 read -n 1
 
 reboot

@@ -79,7 +79,7 @@ echo "---------------------------"
 echo 'Insert the wifi dongle into the odroid. Press [ENTER] to contiue.'
 read -n 1
 
-echo 'The system is rebooting. When it begins again the wifi dongle should be blinking and $ ssh odroid@$robot_name will be possible. Press [ENTER] to continue.'
+echo -e 'The system is rebooting. When it begins again the wifi dongle should be blinking and $ ssh odroid@$robot_name will be possible.\nPress [ENTER] to continue.'
 read -n 1
 
 reboot
