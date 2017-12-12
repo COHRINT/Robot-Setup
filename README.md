@@ -35,11 +35,10 @@ Password: **odroid**
 password: **odroid**
 $ sudo apt-get install git
 9) Get cohrint_turtlebot
-$ cd ~
 $ git clone https://github.com/COHRINT/cohrint_turtlebot.git
-$ cd ~/cohrint_turtlebot/install
+$ cd cohrint_turtlebot/install
 10) Follow the steps in the shell script
-$ bash basic_setup.sh robot_name
+$ sudo bash basic_setup.sh robot_name
 
 #### For Installing Cops and Robots Dependencies
 11) bash cnr_setup.sh

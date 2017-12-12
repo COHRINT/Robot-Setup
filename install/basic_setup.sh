@@ -34,7 +34,10 @@ echo "$robot_name" > /etc/hostname
 sed -i 's/odroid/'"$robot_name"'/g' /etc/hosts
 
 echo "Enter the new password for $robot_name"
+passwd odroid
 
+echo "We are gonig to set up the locales.\nIn the screen that follows hit enter on the 1st option for ALL_LOCALES. On the 2nd page that follows go down to en_US.UTF-8 and hit enter. Press [ENTER] to continue."
+read -n 1
 
 # Set up Locales, check if they've already been set
 if ! [ -v LANG ]; then
@@ -43,7 +46,7 @@ if ! [ -v LANG ]; then
     export LANGUAGE=en_US
     export LC_ALL=en_US.UTF-8
     update-locale LANGUAGE=en_US
-    update-locale LANGUAGE=en_US
+    update-locale LC_ALL=en_US
 
     # After rebooting, everything's "en_US.UTF-8 except LANGUAGE and LC_ALL
     # Ran export then update-locale for first LANGUAGE then LC_ALL we'll see
@@ -57,7 +60,8 @@ if ! [ -v LANG ]; then
     # update-locale LANGUAGE=en_US
 fi
 
-echo "The hostname and locales have been set up correctly. When the system reboots, run # bash basic_setup2.sh as root"
+echo "The hostname and locales have been set up correctly. When the system reboots, run $ sudo bash basic_setup2.sh as root. Press [ENTER] to continue."
 read -n 1
 
-logout
+reboot
+exit 0
