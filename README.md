@@ -5,8 +5,7 @@ This repository aims to centralize cohrint's odroids' software. It contains setu
 
 ###  Robot Setup
 
-#### Starting from scratch, loading Ubuntu 16 onto eMMC
-To setup a new robot:
+#### Loading Ubuntu 16 onto eMMC
 - Go to https://odroid.in/ubuntu_16.04lts/ and download the ubuntu-16.04-mate-odroid-u2u3-20160920.img.xz
 - $ unxz -k ubuntu-16.04-mate-odroid-u2u3-20160920.img.xz
 - Copy that image onto a flash drive
