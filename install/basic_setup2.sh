@@ -59,6 +59,11 @@ systemctl disable NetworkManager-wait-online.service
 # change the possible wait time to 30sec instead of 5 min
 mv setup_files/networking.service /etc/systemd/system/network-online.target.wants/ # apparently this did not work correctly...
 
+# append to the bashrc to update the robot's git info eachtime
+echo -e "Update the cohrint's git repo on each login" >> /home/odroid/.bashrc
+echo -e '\ncd /home/odroid/cohrint_turtlebot;git pull\n' >> /home/odroid/.bashrc
+echo -e 'cd /home/odroid\n' >> /home/odroid/.bashrc 
+
 # Install various command line tools
 apt-get install locate
 updatedb
