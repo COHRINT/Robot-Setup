@@ -36,10 +36,10 @@ sed -i 's/odroid/'"$robot_name"'/g' /etc/hosts
 echo "Enter the new password for $robot_name"
 passwd odroid
 
-echo -e "We are gonig to set up the locales.\nOn the first screen just hit enter. On the second screen select 'en_US.UTF-8' then hit enter. Press [ENTER] to continue."
+echo -e "We are gonig to set up the locales.\nOn the first screen just hit enter.\nOn the second screen select 'en_US.UTF-8' then hit enter. Press [ENTER] to continue."
 read -n 1
 
-# Set up Locales
+# Set up Locales, these need to be in the order shown below...
 locale-gen "en_US.UTF-8" # Makes everthing POSIX except LANG, LANGUAGE and LC_ALL
 dpkg-reconfigure locales    # choose en_US.UTF-8, everything's still POSIX
 export LANGUAGE=en_US
