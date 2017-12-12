@@ -31,8 +31,9 @@ USB-uSD-eMMC card readers are unreliable so we're going to use a hack to load th
 9. Plug the new Ubuntu 16 eMMC chip normally into another Odroid. Hook up a serial console to that odroid and apply power. On your computer run:
 $ sudo screen /dev/ttyUSB0 115200n81 (check a screen commands cheatsheet if you get stuck)
 
-If that does not work-> (your computer may have a differnt name instead of /dev/ttyUSB0 so replace that with the name that your computer assigns to the uart device - to find that simply plug in the device and run $ dmesg |tail and look for a /dev/tty... name that the kernel assigns it)
-      If you get [screen is terminating] unplug and replug the serial USB from your computer and try again in a different terminal
+If that does not work, your computer may have a differnt name instead of /dev/ttyUSB0 so replace that with the name that your computer assigns to the uart device - to find that simply plug in the device and run $ dmesg |tail and look for a /dev/tty... name that the kernel assigns it
+
+If you get [screen is terminating] unplug and replug the serial USB from your computer and try again in a different terminal
       
 10) You should see a terminal "odroid login: " *Login as the user "odroid"*. (If you see no output on the terminal, press enter a few times.)
 
