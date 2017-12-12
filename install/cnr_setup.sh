@@ -25,6 +25,11 @@ apt-get install ros-kinetic-turtlebot-navigation
 apt-get install ros-kinetic-rosbridge-suite
 apt-get install ros-kinetic-map-server
 
+apt-get install ros-kinetic-uvc-camera
+apt-get install ros-kinetic-image-proc
+
+usermod -a -G video odroid
+
 # Add Turtlebot Variables
 echo 'source /opt/ros/kinetic/setup.bash' >> /home/odroid/.bashrc
 echo 'export ROS_MASTER_URI=http://${SSH_CLIENT%% *}:11311' >> /home/odroid/.bashrc
@@ -38,3 +43,7 @@ echo 'export TURTLEBOT_SERIAL_PORT=/dev/ttyUSB0' >> /home/odroid/.bashrc
 
 source /home/odroid/.bashrc
 
+echo 'Press [ENTER] to reboot. This robot is now a fully functional cop and robber.'
+read -n 1
+
+reboot
