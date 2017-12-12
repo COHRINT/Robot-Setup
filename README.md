@@ -46,7 +46,7 @@ LOGINS:
 12) Get cohrint_turtlebot
 - $ git clone https://github.com/COHRINT/cohrint_turtlebot.git
 - $ cd cohrint_turtlebot/install
-13) Follow the steps in the shell script
+13) Run and follow the steps in the shell script
 - $ sudo bash basic_setup.sh robot_name
 
 #### For Installing Cops and Robots Dependencies
