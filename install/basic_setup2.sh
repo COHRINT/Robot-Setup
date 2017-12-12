@@ -59,7 +59,9 @@ systemctl disable NetworkManager-wait-online.service
 mv setup_files/networking.service /etc/systemd/system/network-online.target.wants/ # apparently this did not work correctly...
 
 # append to the bashrc to update the robot's git info eachtime
-echo -e "\nUpdate the cohrint_turtlebot git repo on each login" >> /home/odroid/.bashrc
+echo -e "\n# Update the cohrint_turtlebot git repo on each login" >> /home/odroid/.bashrc
+echo 'Wait for internet connection'
+for i in {1..50}; do ping -c1 www.google.com &> /dev/null && break; done
 echo -e 'cd /home/odroid/cohrint_turtlebot;git pull' >> /home/odroid/.bashrc
 echo -e 'cd /home/odroid' >> /home/odroid/.bashrc
 

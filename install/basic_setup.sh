@@ -36,6 +36,7 @@ sed -i 's/odroid/'"$robot_name"'/g' /etc/hosts
 echo "Enter the new password for $robot_name"
 passwd odroid
 
+echo "---------------------------"
 echo -e "We are gonig to set up the locales.\nOn the first screen just hit enter.\nOn the second screen select 'en_US.UTF-8' then hit enter. Press [ENTER] to continue."
 read -n 1
 
@@ -47,7 +48,7 @@ export LC_ALL=en_US.UTF-8
 update-locale LANGUAGE=en_US
 update-locale LC_ALL=en_US.UTF-8
 
-
+echo "---------------------------"
 echo "The hostname and locales have been set up. When the system reboots, run basic_setup2.sh as root. Press [ENTER] to continue."
 read -n 1
 
