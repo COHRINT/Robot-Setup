@@ -60,7 +60,8 @@ mv setup_files/networking.service /etc/systemd/system/network-online.target.want
 
 # append to the bashrc to update the robot's git info eachtime
 echo -e "\n# Update the cohrint_turtlebot git repo on each login" >> /home/odroid/.bashrc
-echo 'Wait for internet connection'
+echo '# Wait for internet connection' >> /home/odroid/.bashrc
+echo "echo 'Updating cohrint_turtlebot'" >> /home/odroid/.bashrc
 echo 'for i in {1..50}; do ping -c1 www.google.com &> /dev/null && break; done' >> /home/odroid/.bashrc # PlasmaPower on StackOverflow 3/9/14
 echo -e 'cd /home/odroid/cohrint_turtlebot;git pull' >> /home/odroid/.bashrc
 echo -e 'cd /home/odroid' >> /home/odroid/.bashrc
@@ -74,7 +75,7 @@ apt-get install nano
 # Add more command line installs here...
 
 
-
+echo "---------------------------"
 echo 'Insert the wifi dongle into the odroid. Press [ENTER] to contiue.'
 read -n 1
 
