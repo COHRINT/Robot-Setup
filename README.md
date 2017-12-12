@@ -48,3 +48,6 @@ $ bash basic_setup.sh robot_name
 ### Odroid File Tracking
 
 This repository allows centralized file tracking among the odroids. Simply git commit changes and git pull on another odroid.
+
+
+add git config for the shell script
