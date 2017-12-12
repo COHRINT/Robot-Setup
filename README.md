@@ -13,7 +13,7 @@ To setup a new robot:
   $ cp ubuntu-16.04-mate-odroid-u2u3-20160920.img /mounting/directory/path
 - umount and eject the flashdrive
 
-USB-uSD-eMMC card readers are VERY unreliable so we're going to use a hack to load the Ubuntu 16 image onto it
+USB-uSD-eMMC card readers are unreliable so we're going to use a hack to load the Ubuntu 16 image onto it
 1. Boot a working odroid normally, connect via ssh
 2. Connect the eMMC chip to a uSD-eMMC (cohrint's are blue and thin)
 3. Connec the uSD/eMMC to the odroid via the uSD port
