@@ -27,12 +27,12 @@ USB-uSD-eMMC card readers are unreliable so we're going to use a hack to load th
 
 #### Once the eMMC has Ubuntu 16
 
-9. Plug the new Ubuntu 16 eMMC chip normally into another Odroid. Hook up a serial console to that odroid and apply power. On your computer run:
+9. Plug the new Ubuntu 16 eMMC chip normally into an odroid. Attach a serial console to that odroid and your computer. Apply power to the odroid. On your computer run:
 $ sudo screen /dev/ttyUSB0 115200n81 (check a screen commands cheatsheet if you get stuck)
 
-If that does not work, your computer may have a differnt name instead of /dev/ttyUSB0 so replace that with the name that your computer assigns to the uart device - to find that simply plug in the device and run $ dmesg |tail and look for a /dev/tty... name that the kernel assigns it
+If an error such as ttyUSB0 does not exist appears, your computer may have a differnt name instead of /dev/ttyUSB0 so replace that with the name that your computer assigns to the uart device - to find that simply plug in the device and run $ dmesg |tail and look for a /dev/tty... name that the kernel assigns it
 
-If you get [screen is terminating] unplug and replug the serial USB from your computer and try again in a different terminal
+If you get [screen is terminating] unplug and replug the serial USB from your computer and, in a new terminal, try running the command again.
       
 10) You should see a terminal "odroid login: " *Login as the user "odroid"*. (If you see no output on the terminal, try pressing enter a few times.)
 
