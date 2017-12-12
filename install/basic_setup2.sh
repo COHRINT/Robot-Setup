@@ -56,7 +56,7 @@ cp setup_files/blacklist-rtl8192cu.conf /etc/modprobe.d/
 # 10) Network Manager no bueno
 systemctl disable NetworkManager-wait-online.service
 # change the possible wait time to 30sec instead of 5 min
-mv setup_files/networking.service /etc/systemd/system/network-online.target.wants/
+cp setup_files/networking.service /etc/systemd/system/network-online.target.wants/
 
 # append to the bashrc to update the robot's git info eachtime
 echo -e "\n# Update the cohrint_turtlebot git repo on each login" >> /home/odroid/.bashrc
