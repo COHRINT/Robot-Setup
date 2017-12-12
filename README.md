@@ -45,8 +45,8 @@ $ cd cohrint_turtlebot/install
 $ sudo bash basic_setup.sh robot_name
 
 #### For Installing Cops and Robots Dependencies
-11) bash cnr_setup.sh
-12) bash get_cnr_aliases.sh
+11) $ sudo bash cnr_setup.sh
+12) $ bash get_cnr_aliases.sh
 
 ### Odroid File Tracking
 
