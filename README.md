@@ -4,13 +4,14 @@
 This repository aims to centralize cohrint's odroids' software. It contains setup instructions for making a new robot (Robot Setup Section) and one repository for distributing and tracking all relevant files across odroids (Odroid File Tracking).
 
 ###  Robot Setup
+
+#### Starting from scratch, loading Ubuntu 16 onto eMMC
 To setup a new robot:
 - Go to https://odroid.in/ubuntu_16.04lts/ and download the ubuntu-16.04-mate-odroid-u2u3-20160920.img.xz
 - $ unxz -k ubuntu-16.04-mate-odroid-u2u3-20160920.img.xz
 - Copy that image onto a flash drive
   $ cp ubuntu-16.04-mate-odroid-u2u3-20160920.img /mounting/directory/path
 - umount and eject the flashdrive
-
 
 USB-uSD-eMMC card readers are VERY unreliable so we're going to use a hack
 1. Boot a working odroid normally, connect via ssh
@@ -24,6 +25,9 @@ USB-uSD-eMMC card readers are VERY unreliable so we're going to use a hack
    Clear the partition table of the bad eMMC
 8. $ sudo dd if=/mnt/ubuntu-16.04-mate-odroid-u2u3-20160920.img of=/dev/mmcblk1 bs=4M conv=fsync
    This'll take a little while
+
+#### Once the eMMC has Ubuntu 16
+
 9. Remove the uSD/eMMC from the odroid and plug the eMMC chip normally into another Odroid. Hook up a serial console to that new odroid and apply power to it. On your computer run:
 $ sudo screen /dev/ttyUSB0 115200n81 (check a screen commands cheatsheet if you get stuck)
 (your computer may have a differnt name instead of /dev/ttyUSB0 so replace that with the name that your computer assigns to the uart device - to find that simply plug in the device and run $ dmesg |tail and look for a /dev/tty... name that the kernel it assigns it)
@@ -46,7 +50,8 @@ $ sudo bash basic_setup.sh robot_name
 
 #### For Installing Cops and Robots Dependencies
 11) $ sudo bash cnr_setup.sh
-12) $ bash get_cnr_aliases.sh
+12) To set up quick aliases:
+    $ bash get_cnr_aliases.sh
 
 ### Odroid File Tracking
 
