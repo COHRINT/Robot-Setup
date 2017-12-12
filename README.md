@@ -21,10 +21,10 @@ $ sudo dd if=/dev/zero of=/dev/sdX
 4. load the image onto the eMMC (this'll take awhile)
 $ sudo dd if=ubuntu-16.04-mate-odroid-u2u3-20160920.img of=/dev/sdX bs=4M conv=fsync
 5. Once done, right click on one of the two USB icons that pops up and click "Eject Parent Drive"
-6. Remove the eMMC from your computer and plug it into an Odroid, plug in a wifi dongle and hook up a serial console to the odroid and usb and in a terminal on your computer run:
+6. Remove the eMMC from your computer and plug it into an Odroid and hook up a serial console to the odroid and usb and in a terminal on your computer run:
 $ sudo screen /dev/ttyUSB0 115200n81 (check a screen commands cheatsheet if you get stuck)
 (your computer may have a differnt name instead of /dev/ttyUSB0 so replace that with the name that your computer assigns to the uart device - to find that simply plug in the device and run $ dmesg |tail and look for a /dev/tty... name that the kernel it assigns it)
-7) Press enter a few times and you should see a terminal odroid@odroid:~$
+7) Press enter a few times and you should see a terminal "odroid login: " Login as the user "odroid"
 You're in
 User: **odroid**
 Password: **odroid**
@@ -32,7 +32,7 @@ User: **root**
 Password: **odroid**
 
 8) Plug in an ethernet cable and install git
-password: **odroid**
+sudo password: **odroid**
 $ sudo apt-get install git
 9) Get cohrint_turtlebot
 $ git clone https://github.com/COHRINT/cohrint_turtlebot.git

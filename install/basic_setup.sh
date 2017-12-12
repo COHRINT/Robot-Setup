@@ -36,31 +36,19 @@ sed -i 's/odroid/'"$robot_name"'/g' /etc/hosts
 echo "Enter the new password for $robot_name"
 passwd odroid
 
-echo "We are gonig to set up the locales.\nIn the screen that follows hit enter on the 1st option for ALL_LOCALES. On the 2nd page that follows go down to en_US.UTF-8 and hit enter. Press [ENTER] to continue."
+echo -e "We are gonig to set up the locales.\nOn the first screen just hit enter. On the second screen select 'en_US.UTF-8' then hit enter. Press [ENTER] to continue."
 read -n 1
 
-# Set up Locales, check if they've already been set
-if ! [ -v LANG ]; then
-    locale-gen "en_US.UTF-8" # Makes everthing POSIX except LANG, LANGUAGE and LC_ALL
-    dpkg-reconfigure locales    # choose en_US.UTF-8, everything's still POSIX
-    export LANGUAGE=en_US
-    export LC_ALL=en_US.UTF-8
-    update-locale LANGUAGE=en_US
-    update-locale LC_ALL=en_US
+# Set up Locales
+locale-gen "en_US.UTF-8" # Makes everthing POSIX except LANG, LANGUAGE and LC_ALL
+dpkg-reconfigure locales    # choose en_US.UTF-8, everything's still POSIX
+export LANGUAGE=en_US
+export LC_ALL=en_US.UTF-8
+update-locale LANGUAGE=en_US
+update-locale LC_ALL=en_US.UTF-8
 
-    # After rebooting, everything's "en_US.UTF-8 except LANGUAGE and LC_ALL
-    # Ran export then update-locale for first LANGUAGE then LC_ALL we'll see
-    # everything seems to be set up correctly...
-    # I need to pull some rebooting of the system stuff here..., maybe just logout and relogin?
-    # export LANG=en_US.UTF-8
-    # export LANGUAGE=en_US
-    # export LC_ALL=en_US.UTF-8
-    # update-locale LANG=en_US.UTF-8
-    # update-locale LC_ALL=en_US.UTF-8
-    # update-locale LANGUAGE=en_US
-fi
 
-echo "The hostname and locales have been set up correctly. When the system reboots, run $ sudo bash basic_setup2.sh as root. Press [ENTER] to continue."
+echo "The hostname and locales have been set up. When the system reboots, run basic_setup2.sh as root. Press [ENTER] to continue."
 read -n 1
 
 reboot
