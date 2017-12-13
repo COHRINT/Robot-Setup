@@ -30,11 +30,11 @@ USB-uSD-eMMC card readers are unreliable so we're going to use a hack to load th
 9. Plug the new Ubuntu 16 eMMC chip normally into an odroid. Attach a serial console to that odroid and your computer. Apply power to the odroid. On your computer run:
 $ sudo screen /dev/ttyUSB0 115200n81 (check a screen commands cheatsheet for more help with screen)
 
-If an error such as ttyUSB0 does not exist appears, your computer may have a differnt name instead of /dev/ttyUSB0 so replace that with the name that your computer assigns to the uart device - to find that simply plug in the device and run $ dmesg |tail and look for a /dev/tty... name that the kernel assigns it
+If an error such as /dev/ttyUSB0 does not exist appears, your computer may have a differnt name instead of /dev/ttyUSB0 so replace that with the name that your computer assigns to the uart device - to find that simply plug in the device and run $ dmesg |tail and look for a /dev/tty... name that the kernel assigns it (/dev/ttyACMx /dev/ttyUSBx are the most common)
 
-If you get [screen is terminating] unplug and replug the serial USB from your computer and, in a new terminal, try running the command again.
+If the error [screen is terminating] appears, unplug and replug the serial USB from your computer and, in a new terminal, try running the command again.
       
-10) You should see a terminal "odroid login: " *Login as the user "odroid"*. (If you see no output on the terminal, try pressing enter a few times.)
+10) You should see a terminal "odroid login: " Login as the user: *odroid*, password: *odroid*. (If you see no output on the terminal, try pressing enter a few times.)
 
 LOGINS:
 - User: **odroid**, Password: **odroid**
@@ -47,6 +47,9 @@ LOGINS:
 - $ cd cohrint_turtlebot/install
 13) Run and follow the steps in the shell script
 - $ sudo bash basic_setup.sh robot_name
+14) Run the second basic_setup2.sh shell script
+- $ cd cohrint_turtlebot/install
+- $ sudo bash basic_setup2.sh
 
 #### For Installing Cops and Robots Dependencies
 14) Install CnR dependencies

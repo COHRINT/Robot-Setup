@@ -33,6 +33,7 @@ touch /etc/hostname
 echo "$robot_name" > /etc/hostname
 sed -i 's/odroid/'"$robot_name"'/g' /etc/hosts
 
+echo "---------------------------"
 echo "Enter the new password for $robot_name"
 passwd odroid
 
