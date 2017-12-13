@@ -13,7 +13,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Setup the netowrk keys
-echo "What is the password to RECUV-VICON?"
+echo "What is the password to the  RECUV-VICON network?"
 read password
 echo "If you need to change the password, go to /etc/network/interfaces and edit the wpa_psk value, press [ENTER] to continue"
 read -n 1

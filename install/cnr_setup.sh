@@ -16,6 +16,9 @@ fi
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
+echo 'Plug in the ethernet cable and press [ENTER]'
+read n -1
+
 apt-get update
 
 apt-get install ros-kinetic-navigation
@@ -43,6 +46,7 @@ echo 'export TURTLEBOT_SERIAL_PORT=/dev/ttyUSB0' >> /home/odroid/.bashrc
 
 source /home/odroid/.bashrc
 
+echo "---------------------------"
 echo 'Press [ENTER] to reboot. This robot is now a fully functional cop and robber.'
 read -n 1
 

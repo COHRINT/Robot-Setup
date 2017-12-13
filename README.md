@@ -47,7 +47,7 @@ LOGINS:
 - $ cd cohrint_turtlebot/install
 13) Run and follow the steps in the shell script
 - $ sudo bash basic_setup.sh robot_name
-14) Run the second basic_setup2.sh shell script
+14) Plug in the ethernet cable and run the second basic_setup2.sh shell script.
 - $ cd cohrint_turtlebot/install
 - $ sudo bash basic_setup2.sh
 
