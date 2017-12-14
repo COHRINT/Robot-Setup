@@ -51,7 +51,9 @@ LOGINS:
 13) Run and follow the steps in the shell script
 - $ sudo bash basic_setup.sh robot_name
 - Update the robot password to: **unicorn**
-- When it asks for locales on the 1st page select: "[ ] All Locales", on the 2nd page scroll down to: "[ ] en_US.UTF-8"
+- When configuring locales,
+  - 1st page select: "[ ] All Locales"
+  - 2nd page scroll down to: "[ ] en_US.UTF-8"
 14) Run the second basic_setup2.sh shell script.
 - $ cd cohrint_turtlebot/install
 - $ sudo bash basic_setup2.sh
