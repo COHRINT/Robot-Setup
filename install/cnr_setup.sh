@@ -36,6 +36,10 @@ usermod -a -G video odroid
 
 # Let's replace the turtlebot_node.py file
 cp turlebot_files/turtlebot_node.py /opt/ros/kinetic/lib/create_node/
+updatedb
+
+# we want to make the rest of this as odroid
+su - odroid
 
 echo "--------------------------"
 echo "Making a catkin workspace. Press [ENTER] to continue"
@@ -44,13 +48,14 @@ read -n 1
 source /opt/ros/kinetic/setup.bash
 # Create a catkin worksapce
 mkdir -p /home/odroid/catkin_ws/src
-cd /home/odroid/catkin_ws/
+cd /home/odroid/
+# Move cohrint_turtlebot into the catkin workspace
+mv cohrint_turtlebot /home/odroid/catkin_ws/src/
+cd catkin_ws/
 catkin_make
 source devel/setup.bash
 
-# Move cohrint_turtlebot into the catkin workspace
-cd /home/odroid/
-mv cohrint_turtlebot /home/odroid/catkin_ws/src/
+cd /home/odroid
 
 # Correct the bash rc's path
 sed -i 's/cohrint_turtlebot;git/''catkin_ws\/src\/cohrint_turtlebot;git''/g' /home/odroid/.bashrc
@@ -89,7 +94,6 @@ esac
 echo 'export ROS_HOSTNAME=192.168.20.'$rob_ip >> /home/odroid/.bashrc
 
 source /home/odroid/.bashrc
-updatedb
 
 echo "---------------------------"
 echo 'Press [ENTER] to reboot. '$HOSTNAME' is now a fully functional cop and robber.'
