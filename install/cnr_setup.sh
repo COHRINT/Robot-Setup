@@ -30,6 +30,7 @@ apt-get install ros-kinetic-map-server
 
 apt-get install ros-kinetic-uvc-camera
 apt-get install ros-kinetic-image-proc
+apt-get install ros-kinetic-image-transport-plugins
 
 usermod -a -G video odroid
 
@@ -50,6 +51,9 @@ source devel/setup.bash
 # Move cohrint_turtlebot into the catkin workspace
 cd /home/odroid/
 mv cohrint_turtlebot /home/odroid/catkin_ws/src/
+
+# Correct the bash rc's path
+sed -i 's/cohrint_turtlebot;git/''catkin_ws\/src\/cohrint_turtlebot;git''/g' /home/odroid/.bashrc
 
 # Add Turtlebot Variables
 echo 'source /opt/ros/kinetic/setup.bash' >> /home/odroid/.bashrc
@@ -80,10 +84,12 @@ case "$HOSTNAME" in
        echo "change the bashrc to properly reflect the ROS_HOSTNAME number"
        export rob_ip="#"
        ;;
+esac
 
 echo 'export ROS_HOSTNAME=192.168.20.'$rob_ip >> /home/odroid/.bashrc
 
 source /home/odroid/.bashrc
+updatedb
 
 echo "---------------------------"
 echo 'Press [ENTER] to reboot. '$HOSTNAME' is now a fully functional cop and robber.'
