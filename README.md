@@ -1,7 +1,7 @@
 # cohrint_turtlebot
 
 ## Cooperative Human Robotics Intelligence Lab Turtlebot Management Repo
-This repository aims to centralize cohrint's odroids' software. It contains setup instructions for making a new robot (Robot Setup Section) and one repository for distributing and tracking all relevant files across odroids (Odroid File Tracking).
+This repository aims to centralize cohrint's odroid software. It contains setup instructions for making a new robot (Robot Setup) and serves as one repository for distributing and tracking all experiment relevant files across odroids (Odroid File Tracking).
 
 ###  Robot Setup
 
@@ -37,7 +37,7 @@ If an error such as /dev/ttyUSB0 does not exist appears, your computer may have 
 
 If the error [screen is terminating] appears, unplug and replug the serial USB from your computer and, in a new terminal, try running the command again.
       
-10) You should see a terminal "odroid login: " Login as the user: *odroid*, password: *odroid*. (If you see no output on the terminal, try pressing enter a few times.)
+10) You should see a terminal "odroid login: " Login as the user: **odroid**, password: **odroid**. (If you see no output on the terminal, try pressing enter a few times.)
 
 LOGINS:
 - User: **odroid**, Password: **odroid**
@@ -54,7 +54,7 @@ LOGINS:
 - When configuring locales,
   - 1st page select: [#] All Locales
   - 2nd page scroll down to: [#] en_US.UTF-8
-14) Run the second basic_setup2.sh shell script.
+14) Run the second basic_setup2.sh shell script. User: **odroid**, Pw: **unicorn**
 - $ cd cohrint_turtlebot/install
 - $ sudo bash basic_setup2.sh
 
