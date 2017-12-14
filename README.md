@@ -27,6 +27,9 @@ USB-uSD-eMMC card readers are unreliable so we're going to use a hack to load th
 
 #### Once the eMMC has Ubuntu 16
 
+If you don't have screen installed, install it via (check $ man screen):
+$ sudo apt-get install screen
+
 9. Plug the new Ubuntu 16 eMMC chip normally into an odroid. Attach a serial console to that odroid and your computer. Apply power to the odroid. On your computer run:
 $ sudo screen /dev/ttyUSB0 115200n81 (check a screen commands cheatsheet for more help with screen)
 
@@ -47,12 +50,15 @@ LOGINS:
 - $ cd cohrint_turtlebot/install
 13) Run and follow the steps in the shell script
 - $ sudo bash basic_setup.sh robot_name
-14) Plug in the ethernet cable and run the second basic_setup2.sh shell script.
+- Update the robot password to **unicorn**
+- When it asks for locales on the 1st page select [ ] All Locales, on the 2nd page scroll down to [ ] en_US.UTF-8
+14) Run the second basic_setup2.sh shell script.
 - $ cd cohrint_turtlebot/install
 - $ sudo bash basic_setup2.sh
 
 #### For Installing Cops and Robots Dependencies
-14) Install CnR dependencies
+14) Plug in the ethernet cable and install CnR dependencies
+- $ cd cohrint_turtlebot/install
 - $ sudo bash cnr_setup.sh
 15) To set up quick aliases:
 - $ bash get_cnr_aliases.sh
