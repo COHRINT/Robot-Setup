@@ -33,6 +33,9 @@ apt-get install ros-kinetic-image-proc
 
 usermod -a -G video odroid
 
+# Let's replace the turtlebot_node.py file
+cp turlebot_files/turtlebot_node.py /opt/ros/kinetic/lib/create_node/
+
 # Add Turtlebot Variables
 echo 'source /opt/ros/kinetic/setup.bash' >> /home/odroid/.bashrc
 echo 'export ROS_MASTER_URI=http://${SSH_CLIENT%% *}:11311' >> /home/odroid/.bashrc
