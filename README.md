@@ -63,6 +63,7 @@ LOGINS:
 - $ cd cohrint_turtlebot/install
 - $ sudo bash cnr_setup.sh
 16) To set up quick aliases:
+- $ cd cohrint_turtlebot/install
 - $ bash get_cnr_aliases.sh
 
 ### Odroid File Tracking

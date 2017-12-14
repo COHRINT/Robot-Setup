@@ -9,4 +9,5 @@
 		<param name="catch_dist" value="$(arg catch_dist)" />
 		<param name="cop_name" value="$(arg cop_name)" />
 	</node>
+
 </launch>

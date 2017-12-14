@@ -32,15 +32,15 @@
   </include>
 
 
-<!--  <node name="theora_republisher" pkg="image_transport" type="republish" args="raw in:=camera/rgb/image_color theora out:=theora" /> -->
+  <node name="theora_republisher" pkg="image_transport" type="republish" args="raw in:=camera/rgb/image_color theora out:=image_compressed" />
 
 </group>
 
 
-<include file="/home/odroid/catkin_ws/src/cohrint_turtlebot/cnr2/caught/launch/caught.launch">
+<!-- <include file="/home/odroid/catkin_ws/src/cohrint_turtlebot/cnr/caught/launch/caught.launch">
     <arg name="catch_dist" value="$(arg catch_dist)" />
     <arg name="cop_name" value="$(arg robot_name)" />
     <arg name="rob_name" value="$(arg rob)" />
-  </include> 
+  </include> --> 
 
 </launch>
