@@ -27,6 +27,7 @@ apt-get install ros-kinetic-turtlebot
 apt-get install ros-kinetic-turtlebot-navigation
 apt-get install ros-kinetic-rosbridge-suite
 apt-get install ros-kinetic-map-server
+apt-get install ros-kinetic-rosbash
 
 apt-get install ros-kinetic-uvc-camera
 apt-get install ros-kinetic-image-proc
