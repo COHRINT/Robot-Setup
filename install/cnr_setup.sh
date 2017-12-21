@@ -8,40 +8,37 @@
 # Author: LT 12/12/17
 # COHRINT Cooperative Human Robotics Intelligence Lab
 
-if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root" 
+if [[ $EUID -eq 0 ]]; then
+   echo "This script must be run as odroid" 
    exit 1
 fi
 
-sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
 echo 'Plug in the ethernet cable and press [ENTER] (Install speed is much faster)'
 read n -1
 
-apt-get update
+sudo apt-get update
 
-apt-get install ros-kinetic-navigation
-apt-get install ros-kinetic-pcl-ros
-apt-get install ros-kinetic-turtlebot
-apt-get install ros-kinetic-turtlebot-navigation
-apt-get install ros-kinetic-rosbridge-suite
-apt-get install ros-kinetic-map-server
-apt-get install ros-kinetic-rosbash
+sudo apt-get install ros-kinetic-navigation
+sudo apt-get install ros-kinetic-pcl-ros
+sudo apt-get install ros-kinetic-turtlebot
+sudo apt-get install ros-kinetic-turtlebot-navigation
+sudo apt-get install ros-kinetic-rosbridge-suite
+sudo apt-get install ros-kinetic-map-server
+sudo apt-get install ros-kinetic-rosbash
 
-apt-get install ros-kinetic-uvc-camera
-apt-get install ros-kinetic-image-proc
-apt-get install ros-kinetic-image-transport-plugins
+sudo apt-get install ros-kinetic-uvc-camera
+sudo apt-get install ros-kinetic-image-proc
+sudo apt-get install ros-kinetic-image-transport-plugins
 
-usermod -a -G video odroid
+sudo usermod -a -G video odroid
 
 # Let's replace the turtlebot_node.py file
 
-cp /home/odroid/cohrint_turtlebot/install/turtlebot_files/turtlebot_node.py /opt/ros/kinetic/lib/create_node/
-updatedb
-
-# we want to make the rest of this as odroid
-su - odroid
+sudo cp /home/odroid/cohrint_turtlebot/install/turtlebot_files/turtlebot_node.py /opt/ros/kinetic/lib/create_node/
+sudo updatedb
 
 echo "--------------------------"
 echo "Making a catkin workspace. Press [ENTER] to continue"

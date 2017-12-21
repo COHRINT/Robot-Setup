@@ -61,7 +61,7 @@ LOGINS:
 #### For Installing Cops and Robots Dependencies
 15) Plug in the ethernet cable and install CnR dependencies
 - $ cd cohrint_turtlebot/install
-- $ sudo bash cnr_setup.sh
+- $ bash cnr_setup.sh (run as regular user)
 16) To set up quick aliases:
 - $ cd cohrint_turtlebot/install
 - $ bash get_cnr_aliases.sh
