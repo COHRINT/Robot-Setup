@@ -37,7 +37,7 @@ usermod -a -G video odroid
 
 # Let's replace the turtlebot_node.py file
 
-cp /home/odroid/cohrint_turtlebot/install/turtlebot_node.py /opt/ros/kinetic/lib/create_node/
+cp /home/odroid/cohrint_turtlebot/install/turtlebot_files/turtlebot_node.py /opt/ros/kinetic/lib/create_node/
 updatedb
 
 # we want to make the rest of this as odroid
