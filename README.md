@@ -8,8 +8,8 @@ This repository aims to centralize cohrint's odroid software. It contains setup 
 #### Loading Ubuntu 16 onto eMMC
 - Go to https://odroid.in/ubuntu_16.04lts/ and download the ubuntu-16.04-mate-odroid-u2u3-20160920.img.xz
 - $ unxz -k ubuntu-16.04-mate-odroid-u2u3-20160920.img.xz
-- Copy that image onto a flash drive
-  $ cp ubuntu-16.04-mate-odroid-u2u3-20160920.img /mounting/directory/path
+- Copy that image onto a flash drive (Must be larger 4G and **not** formatted with fat32 b/c fat32 does not allow file transfers >4G)
+  $ sudo cp ubuntu-16.04-mate-odroid-u2u3-20160920.img /mounting/directory/path/ End it in a slash
 - umount and eject the flashdrive
 
 USB-uSD-eMMC card readers are unreliable so we're going to use a hack to load the new Ubuntu 16 image onto the old eMMC
@@ -23,7 +23,7 @@ USB-uSD-eMMC card readers are unreliable so we're going to use a hack to load th
 7. $ sudo dd if=/dev/zero of=/dev/mmcblk1 bs=1M count=8
    Clear the partition table of the bad eMMC
 8. $ sudo dd if=/mnt/ubuntu-16.04-mate-odroid-u2u3-20160920.img of=/dev/mmcblk1 bs=4M conv=fsync
-   This'll take a little while
+   This'll take a while
 
 #### Once the eMMC has Ubuntu 16
 

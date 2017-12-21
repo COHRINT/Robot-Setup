@@ -36,7 +36,8 @@ apt-get install ros-kinetic-image-transport-plugins
 usermod -a -G video odroid
 
 # Let's replace the turtlebot_node.py file
-cp turlebot_files/turtlebot_node.py /opt/ros/kinetic/lib/create_node/
+
+cp /home/odroid/cohrint_turtlebot/install/turtlebot_node.py /opt/ros/kinetic/lib/create_node/
 updatedb
 
 # we want to make the rest of this as odroid
@@ -100,4 +101,4 @@ echo "---------------------------"
 echo 'Press [ENTER] to reboot. '$HOSTNAME' is now a fully functional cop and robber.'
 read -n 1
 
-reboot
+sudo reboot
