@@ -65,6 +65,7 @@ LOGINS:
 16) To set up quick aliases:
 - $ cd catkin_ws/src/cohrint_turtlebot/install
 - $ bash get_cnr_aliases.sh
+- $ source ~/.bashrc
 
 ### Odroid File Tracking
 
