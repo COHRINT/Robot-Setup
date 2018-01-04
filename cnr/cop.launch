@@ -37,7 +37,7 @@
 </group>
 
 
-<include file="/home/odroid/catkin_ws/src/cohrint_turtlebot/cnr/caught/launch/caught.launch">
+<include file="/home/odroid/catkin_ws/src/cohrint_turtlebot/cnr/bot_caught/launch/caught.launch">
     <arg name="catch_dist" value="$(arg catch_dist)" />
     <arg name="cop_name" value="$(arg robot_name)" />
     <arg name="rob_name" value="$(arg rob)" />
