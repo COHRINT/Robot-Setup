@@ -4,6 +4,7 @@
 
 	<arg name="catch_dist" default="0.5" />
 	<arg name="cop_name" default="$(env ROBOT)"/>
+	<arg name="rob_name" />
 
 	<node name="caught_robber" pkg="caught" type="caught_robber.py" output="screen">
 		<param name="catch_dist" value="$(arg catch_dist)" />
