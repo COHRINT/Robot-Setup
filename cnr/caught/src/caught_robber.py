@@ -46,6 +46,7 @@ class Caught_Robber(object):
     def __init__(self):
         rospy.init_node('caught_robber')
 	dist = rospy.get_param('~catch_dist', DEFAULT_CATCH_DIST)
+        self.robber_name = rospy.get_param('~robber_name')
         # Identify benchmark pixels => "a catch"
 	rospy.loginfo("Desired catch distance: " + str(dist))
         self.caught_val = self.calibrate_caught_distance(dist)
@@ -112,6 +113,8 @@ class Caught_Robber(object):
 
             for rob in self.robber_info:
                 if self.robber_info[rob]['caught'] == True: # check if robber has already been caught
+                    continue
+                if rob != self.robber_name:
                     continue
 
                 r_min = self.robber_info[rob]['r']['MIN']
