@@ -2,3 +2,6 @@ controller_frequency: 1.0
 
 local_costmap:
   update_frequency: 1.0
+
+inflation_layer:
+  inflation_radius: 0
