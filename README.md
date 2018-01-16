@@ -9,7 +9,7 @@ This repository aims to centralize cohrint's odroid software. It contains setup 
 - Go to https://odroid.in/ubuntu_16.04lts/ and download the ubuntu-16.04-mate-odroid-u2u3-20160920.img.xz
 - $ unxz -k ubuntu-16.04-mate-odroid-u2u3-20160920.img.xz
 - Copy that image onto a flash drive (Must be larger 4G and **not** formatted with fat32 b/c fat32 does not allow file transfers >4G)
-  $ sudo cp ubuntu-16.04-mate-odroid-u2u3-20160920.img /mounting/directory/path/ End it in a slash
+  $ sudo cp ubuntu-16.04-mate-odroid-u2u3-20160920.img /mounting/directory/path/ End it with a slash
 - umount and eject the flashdrive
 
 USB-uSD-eMMC card readers are unreliable so we're going to use a hack to load the new Ubuntu 16 image onto the old eMMC
@@ -38,7 +38,8 @@ If an error such as /dev/ttyUSB0 does not exist appears, your computer may have 
 If the error [screen is terminating] appears, unplug and replug the serial USB from your computer and, in a new terminal, try running the command again.
       
 10) You should see a terminal "odroid login: " Login as the user: **odroid**, password: **odroid**. (If you see no output on the terminal, try pressing enter a few times.)
-
+    If you see output but do not receive the **odroid login:** prompt but instead receive an *Exynos* prompt then there is an error in the uboot. Visit https://drive.google.com/drive/folders/1AZHsD-TSEuYl4MRhZgRzLsRfPP4OkqzX for instructions on fixing the hidden boot sectors.
+    
 LOGINS:
 - User: **odroid**, Password: **odroid**
 - User: **root**, Password: **odroid**
