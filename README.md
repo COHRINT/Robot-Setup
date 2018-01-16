@@ -38,6 +38,7 @@ If an error such as /dev/ttyUSB0 does not exist appears, your computer may have 
 If the error [screen is terminating] appears, unplug and replug the serial USB from your computer and, in a new terminal, try running the command again.
       
 10) You should see a terminal "odroid login: " Login as the user: **odroid**, password: **odroid**. (If you see no output on the terminal, try pressing enter a few times.)
+
     If you see output but do not receive the **odroid login:** prompt but instead receive an *Exynos* prompt then there is an error in the uboot. Visit https://drive.google.com/drive/folders/1AZHsD-TSEuYl4MRhZgRzLsRfPP4OkqzX for instructions on fixing the hidden boot sectors.
     
 LOGINS:
