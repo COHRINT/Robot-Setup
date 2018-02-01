@@ -2,8 +2,9 @@
   <arg name="robot_name" value="$(env ROBOT)" />
 
   <group ns="$(arg robot_name)">
-  <arg name="custom_param_file" default="/home/odroid/catkin_ws/src/cohrint_turtlebot/turtlebot_params/custom_params.yaml"/>
-
+  
+  <arg name="custom_param_file" default="$(find turtlebot_navigation)/param/dummy.yaml" />
+  
   <include file="$(find turtlebot_bringup)/launch/minimal.launch">
    <!-- <arg name="robot_name" value="$(arg robot_name)" /> -->
   </include>
