@@ -30,6 +30,7 @@ import numpy.polynomial.polynomial as poly
 import os
 import yaml
 
+from std_msgs.msg import Bool
 from sensor_msgs.msg import Image
 from caught.msg import Caught
 from cv_bridge import CvBridge, CvBridgeError
@@ -60,6 +61,7 @@ class Caught_Robber(object):
         self.num_robbers = 0
         self.pub = rospy.Publisher('/caught' , Caught, queue_size=10)
         rospy.Subscriber('/caught_confirm', Caught, self.jail_robber)
+        self.freezer = rospy.Publisher('/freeze_experiment', Bool, queue_size=10)
         # Open color config file of robbers
         try:
 	    #print("\n\n\nTrying to open\n\n\n")
@@ -166,6 +168,10 @@ class Caught_Robber(object):
                             self.pub.publish(msg)
                             self.counter = 0 # restart
 			    rospy.loginfo("Caught Node publishing catch of: " + rob.capitalize())
+                            # Freeze the robots
+                            freeze_msg = Bool()
+                            freeze_msg.data = True
+                            self.freezer.publish(freeze_msg)
                 else:
                     self.counter = 0
 
@@ -187,6 +193,7 @@ class Caught_Robber(object):
             rospy.loginfo("All Robbers Caught!")
             rospy.loginfo("Reinitializing every robber to run again.")
             self.wait_time = WAIT_TIME * 2
+            rospy.loginfo("Starting WaitTime")
             for rob in self.robber_info:
                 if self.rob_name is None:
                     self.robber_info[rob]['caught'] = False
@@ -195,8 +202,12 @@ class Caught_Robber(object):
                     self.robber_info[rob]['caught'] = False
                     self.num_robbers += 1
                 # else robber is already marked as caught
-            rospy.loginfo("Starting WaitTime")
-            self.publishing = False
-
+                
+        rospy.loginfo("Unfreezing Robots")
+        self.publishing = False
+        freeze_msg = Bool()
+        freeze_msg.data = False
+        self.freezer.publish(freeze_msg)
+        
 if __name__ == '__main__':
     a = Caught_Robber()

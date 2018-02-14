@@ -61,7 +61,7 @@ from geometry_msgs.msg import Point, Pose, Pose2D, PoseWithCovariance, \
     Quaternion, Twist, TwistWithCovariance, Vector3
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import JointState
-from std_msgs.msg import Bool # Stop Experiment
+from std_msgs.msg import Bool # Freeze Experiment
 
 from create_driver import Turtlebot, MAX_WHEEL_SPEED, DriverError
 from create_node.msg import TurtlebotSensorState, Drive, Turtle
@@ -109,7 +109,7 @@ class TurtlebotNode(object):
         self.req_cmd_vel = None
 
         rospy.init_node('turtlebot')
-	rospy.Subscriber('/caught', Bool, self.freeze) # for stopping the robots when the user is confirming the catch
+	rospy.Subscriber('/freeze_experiment', Bool, self.freeze)
         self._init_params()
         self._init_pubsub()
         
@@ -161,7 +161,7 @@ class TurtlebotNode(object):
 
     def freeze(self, msg):
         # This function is intended to freeze the robot when the user is being prompted on whether each robot has been caught. (So that the robot's do not collide into each other)
-	self.stop ^= self.stop # either stop or don't stop at each movement
+	self.stop = msg.data # either stop or don't stop at each movement
 
     def _init_params(self):
         self.port = rospy.get_param('~port', self.default_port)
