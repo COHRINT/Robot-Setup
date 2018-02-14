@@ -185,7 +185,7 @@ class Caught_Robber(object):
 	    rospy.loginfo("Beginning wait time of " + str(self.wait_time))
 	if self.num_robbers == 0:
             rospy.loginfo("All Robbers Caught!")
-            rospy.loginfo("Reinitializing every robber to run again".)
+            rospy.loginfo("Reinitializing every robber to run again.")
             self.wait_time = WAIT_TIME * 3
             for rob in self.robber_info:
                 if self.rob_name is None:
