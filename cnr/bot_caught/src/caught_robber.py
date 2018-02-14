@@ -196,6 +196,7 @@ class Caught_Robber(object):
                     self.num_robbers += 1
                 # else robber is already marked as caught
             rospy.loginfo("Starting WaitTime")
+            self.publishing = False
 
 if __name__ == '__main__':
     a = Caught_Robber()
