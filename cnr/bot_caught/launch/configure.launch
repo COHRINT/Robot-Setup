@@ -2,30 +2,19 @@
 <!-- This launch file launches minimal and the camera node for teleop control while calibrating camers -->
 
 <launch>
-  
+  <arg name="robot_name" value="$(env ROBOT)" />
        <arg name="rob" /> <!-- necessary to know which robber to catch -->
 	<arg name="catch_dist" default="0.5" />
 
 
   <include file="$(find turtlebot_bringup)/launch/minimal.launch">
-  </include>
-	
+  </include>	
+
+<group ns="$(arg robot_name)">
 
 <!-- Playstation I pkg -->
   <node name="camera" pkg="uvc_camera" type="uvc_camera_node" /> 
   <node name="image_processing" pkg="image_proc" type="image_proc"/> 
-
-
-  <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml">
-    <arg name="custom_param_file" value="$(arg custom_param_file)" />
-    <arg name="odom_frame_id"   value="$(arg robot_name)/odom"/>
-    <arg name="base_frame_id"   value="$(arg robot_name)/base_footprint"/>
-    <arg name="global_frame_id" value="/map"/>
-    <arg name="odom_topic" value="/$(arg robot_name)/odom" />
-    <arg name="laser_topic" value="/$(arg robot_name)/scan" />
-
-  </include>
-
 
   <node name="theora_republisher" pkg="image_transport" type="republish" args="raw in:=camera/rgb/image_color theora out:=image_compressed" />
 
