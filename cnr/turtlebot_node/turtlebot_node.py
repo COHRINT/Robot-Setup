@@ -109,7 +109,7 @@ class TurtlebotNode(object):
         self.req_cmd_vel = None
 
         rospy.init_node('turtlebot')
-	rospy.Subscriber('/stop_experiment', Bool, self.stop_movement)
+	rospy.Subscriber('/caught', Bool, self.freeze) # for stopping the robots when the user is confirming the catch
         self._init_params()
         self._init_pubsub()
         
@@ -159,8 +159,9 @@ class TurtlebotNode(object):
             # check for exit conditions
             pass
 
-    def stop_movement(self, msg):
-	self.stop = True
+    def freeze(self, msg):
+        # This function is intended to freeze the robot when the user is being prompted on whether each robot has been caught. (So that the robot's do not collide into each other)
+	self.stop ^= self.stop # either stop or don't stop at each movement
 
     def _init_params(self):
         self.port = rospy.get_param('~port', self.default_port)
