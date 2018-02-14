@@ -17,7 +17,7 @@ from __future__ import print_function
 __author__ = "LT"
 __copyright__ = "Copyright 2017, Cohrint"
 __license__ = "GPL"
-__version__ = "1.5" # ODROID VERSION
+__version__ = "1.6" # ODROID VERSION
 __maintainer__ = "LT"
 __email__ = "luba6098@colorado.edu"
 __status__ = "Stable"
@@ -138,8 +138,7 @@ class Caught_Robber(object):
 
                 # Analyze and manipulate the image
                 mask = cv2.inRange(cv_image, lower_np, upper_np) # Color mask image according to min and max
-                cont, hier = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-                #output = cv2.bitwise_and(cv_image, cv_image, mask = mask)
+                image, cont, hier = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
                 # check if there are no controus
                 if not cont:
@@ -164,11 +163,6 @@ class Caught_Robber(object):
 			    rospy.loginfo("Caught Node publishing catch of: " + rob.capitalize())
                 else:
                     self.counter = 0
-
-                # cv2.imshow("image", cv_image) #For un affected image view
-
-                #cv2.imshow("mask", output)
-                #cv2.waitKey(5)
 
         except CvBridgeError as e:
             print(e)
