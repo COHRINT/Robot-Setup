@@ -17,7 +17,7 @@ from __future__ import print_function
 __author__ = "LT"
 __copyright__ = "Copyright 2017, Cohrint"
 __license__ = "GPL"
-__version__ = "1.6" # ODROID VERSION
+__version__ = "1.7" # ODROID VERSION
 __maintainer__ = "LT"
 __email__ = "luba6098@colorado.edu"
 __status__ = "Stable"
@@ -46,6 +46,7 @@ class Caught_Robber(object):
     def __init__(self):
         rospy.init_node('caught_robber')
 	dist = rospy.get_param('~catch_dist', DEFAULT_CATCH_DIST)
+        self.rob_name = rospy.get_param('~rob_name', None)
         self.robber_name = rospy.get_param('~robber_name')
         # Identify benchmark pixels => "a catch"
 	rospy.loginfo("Desired catch distance: " + str(dist))
@@ -68,8 +69,14 @@ class Caught_Robber(object):
             with open(yaml_cfg_file, 'r') as color_cfg:
                 self.robber_info = yaml.load(color_cfg) # load color info as a dict
                 for rob in self.robber_info:
-                    self.robber_info[rob]['caught'] = False
-                    self.num_robbers += 1
+                    if self.rob_name is None:
+                        self.robber_info[rob]['caught'] = False
+                        self.num_robbers += 1
+                    elif self.rob_name == rob:
+                        self.robber_info[rob]['caught'] = False
+                        self.num_robbers += 1
+                    else: # let's only search for one robber
+                        self.robber_info[rob]['caught'] = True
 
         except IOError as ioerr:
             print(ioerr)
@@ -79,7 +86,7 @@ class Caught_Robber(object):
 	self.wait_time = 0
 
         self.counter = 0 # Counter for blob detection consistency
-        self.caught_count = 1 # The number counter must reach for a catch (filter consistency in reading)
+        self.caught_count = 3 # The number counter must reach for a catch (filter consistency in reading)
 
         rospy.loginfo("Caught Robber callback ready")
         rospy.spin()
@@ -124,7 +131,8 @@ class Caught_Robber(object):
                 r_max = self.robber_info[rob]['r']['MAX']
                 g_max = self.robber_info[rob]['g']['MAX']
                 b_max = self.robber_info[rob]['b']['MAX']
-                
+
+                # switch values b/c the ps3 camera outputs them differently
                 r_min, b_min = b_min, r_min
                 r_max, b_max = b_max, r_max
 
@@ -180,8 +188,16 @@ class Caught_Robber(object):
 	    rospy.loginfo("Beginning wait time of " + str(self.wait_time))
 	if self.num_robbers == 0:
             rospy.loginfo("All Robbers Caught!")
-            rospy.signal_shutdown("All Robbers Caught!")
-
+            rospy.loginfo("Reinitializing every robber to run again".)
+            self.wait_time = WAIT_TIME * 3
+            for rob in self.robber_info:
+                if self.rob_name is None:
+                    self.robber_info[rob]['caught'] = False
+                    self.num_robbers += 1
+                elif self.rob_name == rob:
+                    self.robber_info[rob]['caught'] = False
+                    self.num_robbers += 1
+                # else robber is already marked as caught
 
 if __name__ == '__main__':
     a = Caught_Robber()
