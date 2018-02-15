@@ -87,7 +87,7 @@ class Caught_Robber(object):
 	self.wait_time = 0
 
         self.counter = 0 # Counter for blob detection consistency
-        self.caught_count = 3 # The number counter must reach for a catch (filter consistency in reading)
+        self.caught_count = 1 # The number counter must reach for a catch (filter consistency in reading)
 
         rospy.loginfo("Caught Robber callback ready")
         rospy.spin()
