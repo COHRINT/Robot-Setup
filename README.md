@@ -1,7 +1,7 @@
 # cohrint_turtlebot
 
 ## Cooperative Human Robotics Intelligence Lab Turtlebot Management Repo
-This repository aims to centralize cohrint's odroid software. It contains setup instructions for making a new robot (Robot Setup) and serves as one repository for distributing and tracking all experiment relevant files across odroids (Odroid File Tracking).
+This repository aims to centralize cohrint's odroid software. It contains setup instructions for making a new robot (Robot Setup) and serves as one repository for distributing and tracking all experiment relevant files across odroids (Odroid File Tracking). For a great walk through on turtlebot parameters visit http://kaiyuzheng.me/documents/navguide.pdf .
 
 ###  Robot Setup
 
