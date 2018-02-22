@@ -2,7 +2,7 @@ DWAPlannerROS:
 
 # Robot Configuration Parameters - Kobuki
   max_vel_x: 0.35  # (0.39 but we'll choose less)
-  min_vel_x: -0.1 # This way we can move backwards 
+  min_vel_x: 0.0 # This way we can move backwards 
 
   max_vel_y: 0.0  # diff drive robot
   min_vel_y: 0.0  # diff drive robot
@@ -54,4 +54,4 @@ DWAPlannerROS:
 
 
 # Differential-drive robot configuration - necessary?
-  holonomic_robot: false
+  holonomic_robot: true
