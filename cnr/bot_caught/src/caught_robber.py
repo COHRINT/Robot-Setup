@@ -38,7 +38,7 @@ from cv_bridge import CvBridge, CvBridgeError
 # calculated from find_cam_calib.py
 # coefs = [ 33518.96832373, -48636.45623814,  18884.04641427] # for 0.125 - 1.5
 coefs = [ 34706.81758805, -58782.89189293,  27970.47650456]
-WAIT_TIME = 200 # cycles between a false alarm and begin search for next catch
+WAIT_TIME = 50 # cycles between a false alarm and begin search for next catch
 DEFAULT_CATCH_DIST = 0.5
 
 class Caught_Robber(object):
