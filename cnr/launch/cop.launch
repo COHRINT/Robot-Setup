@@ -2,7 +2,7 @@
   <arg name="robot_name" value="$(env ROBOT)" />
   
        <arg name="rob" /> <!-- necessary to know which robber to catch -->
-	<arg name="catch_dist" default="0.7" />
+	<arg name="catch_dist" default="1.0" />
 
 
   <group ns="$(arg robot_name)">

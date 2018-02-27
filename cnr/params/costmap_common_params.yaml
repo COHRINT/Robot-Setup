@@ -46,7 +46,7 @@ obstacle_layer:
 inflation_layer:
   enabled:              true
   cost_scaling_factor:  2.75  # exponential rate at which the obstacle cost drops off (default: 10) (setting it higher makes decay curve more steep)
-  inflation_radius:     1.0  # max. distance from an obstacle at which costs are incurred for planning paths.
+  inflation_radius:     1.5  # max. distance from an obstacle at which costs are incurred for planning paths.
 
 
 # Inflation_radius notes
